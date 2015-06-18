@@ -5,6 +5,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 settings = {
   :hostname => "example.com",
+  :aliases => ["www.example.com", "alias.example.com"],
   :domain => "example.com",
   :box => "centos7puppet",
   :ip => "192.168.33.10",
@@ -17,6 +18,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Hostname
     config.vm.host_name = "#{settings[:hostname]}"
+
+    if settings[:aliases]
+        config.hostsupdater.aliases = settings[:aliases]
+    end
 
     # Provider box url
     config.vm.box = "#{settings[:box]}"
