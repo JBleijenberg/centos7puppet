@@ -1,18 +1,23 @@
 ---
 classes:
-  - httpd
-  - php
-  - redis
-  - composer
-  - magerun
-  - mariadb
+  - httpd # Install apache 2.4
+  - php # Install PHP 5.4
+  - redis # Install Redis cache
+  - composer # Install composer
+  - magerun # Install magerun
+  - mariadb # Install mariadb
 
-vhosts:
-  "example.com":
-    port: 80
-    docroot: "/var/www/example.com"
+vhosts: # Array of vhosts.
+  "example.com": # Your domain and server name
+    port: 80 # Port to listen on. Default is 80
+    docroot: "/var/www/example.com" # Document root of your website
+    options: "+Indexes +MultiViews" # Options for your website directory. Default is +Indexes +MultiViews
+    owner: vagrant # Owner of documentroot. Default is vagrant
+    group: vagrant # Group of documentroot. Default is vagrant
+  "alias.example.com": # Another vhost
+    docroot: "/var/www/alias.example.com"
 
-databases:
-  "mydb2":
-    user: "myuser2"
-    passwd: "mypasswd2"
+databases: # Array of databases
+  "mydb2": # You database name
+    user: "myuser2" # Database user
+    passwd: "mypasswd2" # Password
