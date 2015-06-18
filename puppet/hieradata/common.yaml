@@ -2,16 +2,16 @@
 classes:
   - firewall
 
-httpd::user: vagrant
-httpd::group: vagrant
-httpd::options: "+Indexes +MultiViews"
+httpd::user: vagrant # Default apache user
+httpd::group: vagrant # Default apache group
+httpd::options: "+Indexes +MultiViews" # Default directory options
 
-mariadb::root::user: root
-mariadb::root::passwd: myrootpasswd
-mariadb::default::host: localhost
-mariadb::default::grant: "ALL PRIVILEGES"
+mariadb::root::user: root # Default root user
+mariadb::root::passwd: myrootpasswd # Default root password
+mariadb::default::host: localhost # Default host
+mariadb::default::grant: "ALL PRIVILEGES" # Default privileges
 
-redis::default::databases: 16
-redis::default::port: 6379
-redis::default::runasdeamon: no
-redis::default::bind: "127.0.0.1"
+redis::default::databases: 16 # Default nr. of Redis databases
+redis::default::port: 6379 # Default Redis port
+redis::default::runasdeamon: no # Default deamon setting
+redis::default::bind: "127.0.0.1" # Default bind address
