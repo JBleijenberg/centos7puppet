@@ -19,3 +19,4 @@ settings = {
 ```
 
 You can leave :puppet_options empty if you don't want to see debug information (which you probably don't)
+You can add vhosts, classes and databases in ```puppet/hieradata/default.yaml```
