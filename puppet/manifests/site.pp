@@ -1,4 +1,4 @@
-node "example.com" {
+node default {
   hiera_include('classes')
 
   if  defined(Class['httpd']) {
