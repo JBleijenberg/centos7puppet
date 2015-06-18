@@ -1,0 +1,15 @@
+<VirtualHost *:<%= @port %>>
+    DocumentRoot <%= @docroot %>
+    ServerName <%= @domain %>
+
+    ErrorLog "/var/log/httpd/<%= @domain %>-error_log"
+    CustomLog "/var/log/httpd/<%= @domain %>-access_log" common
+
+    <Directory "<%= @docroot %>">
+        Options <%= @options %>
+        DirectoryIndex index.php
+
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>

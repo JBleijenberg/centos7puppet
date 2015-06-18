@@ -1,0 +1,11 @@
+#!/bin/bash
+
+result=$(mysql -uroot -p$1 -e"$2")
+
+if [ $? -eq 0 ] && [ "$result" ]; then
+    echo 'Target record EXISTS.'
+    exit 0
+else
+    echo 'Target record DOES NOT EXIST.'
+    exit 1
+fi

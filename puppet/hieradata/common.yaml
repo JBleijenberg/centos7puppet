@@ -1,0 +1,17 @@
+---
+classes:
+  - firewall
+
+httpd::user: vagrant
+httpd::group: vagrant
+httpd::options: "+Indexes +MultiViews"
+
+mariadb::root::user: root
+mariadb::root::passwd: myrootpasswd
+mariadb::default::host: localhost
+mariadb::default::grant: "ALL PRIVILEGES"
+
+redis::default::databases: 16
+redis::default::port: 6379
+redis::default::runasdeamon: no
+redis::default::bind: "127.0.0.1"

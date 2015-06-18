@@ -1,0 +1,18 @@
+---
+classes:
+  - httpd
+  - php
+  - redis
+  - composer
+  - magerun
+  - mariadb
+
+vhosts:
+  "example.com":
+    port: 80
+    docroot: "/var/www/example.com"
+
+databases:
+  "mydb2":
+    user: "myuser2"
+    passwd: "mypasswd2"
