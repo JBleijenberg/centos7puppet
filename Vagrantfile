@@ -19,8 +19,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Hostname
     config.vm.host_name = "#{settings[:hostname]}"
 
-    if settings[:aliases]
-        config.hostsupdater.aliases = settings[:aliases]
+    unless Vagrant.has_plugin?("vagrant-hostsupdater")
+      raise 'vagrant hostsupdated is not installed!'
+    else
+        if settings[:aliases]
+            config.hostsupdater.aliases = settings[:aliases]
+        end
     end
 
     # Provider box url
