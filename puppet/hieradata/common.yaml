@@ -13,5 +13,5 @@ mariadb::default::grant: "ALL PRIVILEGES" # Default privileges
 
 redis::default::databases: 16 # Default nr. of Redis databases
 redis::default::port: 6379 # Default Redis port
-redis::default::runasdeamon: no # Default deamon setting
+redis::default::runasdeamon: "no" # Default deamon setting
 redis::default::bind: "127.0.0.1" # Default bind address
