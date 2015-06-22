@@ -10,6 +10,7 @@ define httpd::vhost(
 # Ensure that the documentroot exists
   file { $docroot:
     ensure => directory,
+    recurse => true,
     owner => $owner,
     group => $group,
     mode => 775,
