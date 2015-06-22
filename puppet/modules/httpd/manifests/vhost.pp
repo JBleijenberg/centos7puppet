@@ -14,7 +14,7 @@ define httpd::vhost(
     group => $group,
     mode => 775,
     require => Package['httpd'],
-    after => Exec['makerootdir-p']
+    subscribe => Exec['makerootdir-p']
   }
 
   exec { 'makerootdir-p':
