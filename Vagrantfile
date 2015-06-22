@@ -39,9 +39,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vm.network "private_network", type: "dhcp", auto_correct: true
     end
 
-    # Host-only access private network
-    config.vm.network :private_network, ip: settings[:ip]
-
     # Shared folders
     config.vm.synced_folder "src/", "/var/www/#{settings[:domain]}", owner: "vagrant", group: "vagrant"
     config.vm.synced_folder "puppet/hieradata/", "/etc/puppet/hieradata"
