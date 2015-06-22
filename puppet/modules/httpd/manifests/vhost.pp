@@ -10,11 +10,15 @@ define httpd::vhost(
 # Ensure that the documentroot exists
   file { $docroot:
     ensure => directory,
-    recurse => true,
     owner => $owner,
     group => $group,
     mode => 775,
     require => Package['httpd'],
+    after => Exec['makerootdir-p']
+  }
+
+  exec { 'makerootdir-p':
+    command => "/usr/bin/mkdir -p $docroot"
   }
 
 # Create vhost configuration before creating the symbolic link which enables the vhosts
