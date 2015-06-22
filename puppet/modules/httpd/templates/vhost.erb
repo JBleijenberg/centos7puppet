@@ -5,7 +5,7 @@
     ErrorLog "/var/log/httpd/<%= @name %>-error_log"
     CustomLog "/var/log/httpd/<%= @name %>-access_log" common
 
-    <Directory "<%= @name %>">
+    <Directory "<%= @docroot %>">
         Options <%= @options %>
         DirectoryIndex index.php
 
