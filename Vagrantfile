@@ -34,9 +34,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.network :forwarded_port, guest: 80, host: 8080
 
     if settings[:ip]
-      config.vm.network "private_network", ip: settings[:ip]
+      config.vm.network "private_network", ip: settings[:ip], auto_correct: true
     else
-      config.vm.network "private_network", type: "dhcp"
+      config.vm.network "private_network", type: "dhcp", auto_correct: true
     end
 
     # Host-only access private network
