@@ -8,7 +8,7 @@ settings = {
   :aliases => ["www.example.com", "alias.example.com"],
   :domain => "example.com",
   :box => "centos7puppet",
-  :ip => "192.168.33.10",
+  :ip => "192.168.33.10", # If not set, DHCP will be used
   :puppet_options => "--debug",
 }
 
@@ -32,6 +32,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Port forwarding
     config.vm.network :forwarded_port, guest: 80, host: 8080
+
+    if settings[:ip]
+      config.vm.network "private_network", ip: settings[:ip]
+    else
+      config.vm.network "private_network", type: "dhcp"
+    end
 
     # Host-only access private network
     config.vm.network :private_network, ip: settings[:ip]
