@@ -6,6 +6,7 @@ classes:
   - composer # Install composer
   - magerun # Install magerun
   - mariadb # Install mariadb
+  - solr # Install solr
 
 vhosts: # Array of vhosts.
   "example.com": # Your domain and server name
