@@ -31,12 +31,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box = "#{settings[:box]}"
 
     # Port forwarding
-    config.vm.network :forwarded_port, guest: 80, host: 8080
+    config.vm.network :forwarded_port, guest: 80, host: 8080, auto_correct: true
 
     if settings[:ip]
-      config.vm.network "private_network", ip: settings[:ip], auto_correct: true
+      config.vm.network "private_network", ip: settings[:ip]
     else
-      config.vm.network "private_network", type: "dhcp", auto_correct: true
+      config.vm.network "private_network", type: "dhcp"
     end
 
     # Shared folders
