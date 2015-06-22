@@ -1,5 +1,6 @@
 ---
 classes:
+  - git # Install git
   - httpd # Install apache 2.4
   - php # Install PHP 5.4
   - redis # Install Redis cache
@@ -7,6 +8,9 @@ classes:
   - magerun # Install magerun
   - mariadb # Install mariadb
   - solr # Install solr
+
+known_hosts:
+  "github.com" # Add github.com to known_hosts file, so one is able to checkout a private repo
 
 vhosts: # Array of vhosts.
   "example.com": # Your domain and server name
