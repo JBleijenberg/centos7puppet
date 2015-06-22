@@ -6,19 +6,19 @@ define httpd::vhost(
   $group = hiera(httpd::group),
   $mode = 644,
 ) {
+notice($name)
 
-# Ensure that the documentroot exists
+  exec { 'makerootdir-p':
+    command => "/usr/bin/mkdir -p $docroot"
+  }->
+
+  # Ensure that the documentroot exists with the correct permissions
   file { $docroot:
     ensure => directory,
     owner => $owner,
     group => $group,
     mode => 775,
-    require => Package['httpd'],
-    subscribe => Exec['makerootdir-p']
-  }
-
-  exec { 'makerootdir-p':
-    command => "/usr/bin/mkdir -p $docroot"
+    require => Package['httpd']
   }
 
 # Create vhost configuration before creating the symbolic link which enables the vhosts

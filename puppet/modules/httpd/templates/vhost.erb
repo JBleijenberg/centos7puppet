@@ -1,11 +1,11 @@
 <VirtualHost *:<%= @port %>>
     DocumentRoot <%= @docroot %>
-    ServerName <%= @domain %>
+    ServerName <%= @name %>
 
-    ErrorLog "/var/log/httpd/<%= @domain %>-error_log"
-    CustomLog "/var/log/httpd/<%= @domain %>-access_log" common
+    ErrorLog "/var/log/httpd/<%= @name %>-error_log"
+    CustomLog "/var/log/httpd/<%= @name %>-access_log" common
 
-    <Directory "<%= @docroot %>">
+    <Directory "<%= @name %>">
         Options <%= @options %>
         DirectoryIndex index.php
 
