@@ -6,9 +6,8 @@ define httpd::vhost(
   $group = hiera(httpd::group),
   $mode = 644,
 ) {
-notice($name)
 
-  exec { 'makerootdir-p':
+  exec { "makerootdir-p-${name}":
     command => "/usr/bin/mkdir -p $docroot"
   }->
 
