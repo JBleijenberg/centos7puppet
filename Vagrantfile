@@ -45,7 +45,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     # Shared folders
-    config.vm.synced_folder "src/", "/var/www/#{settings[:domain]}", owner: "vagrant", group: "vagrant"
+    config.vm.synced_folder "src/", "/var/www", owner: "vagrant", group: "vagrant"
     config.vm.synced_folder "puppet/hieradata/", "/etc/puppet/hieradata"
 
     # Puppet config
