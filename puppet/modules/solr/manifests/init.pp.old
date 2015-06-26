@@ -1,0 +1,88 @@
+class solr (
+  $version = hiera('solr::version')
+) {
+  # Install , Tomcat and SLF4J
+  package { [
+    'java-1.7.0-openjdk',
+    'slf4j',
+    'apache-commons-logging',
+    'tomcat',
+    'tomcat-admin-webapps',
+    'tomcat-docs-webapp',
+    'tomcat-webapps'
+  ]:
+    ensure => present
+  }->
+
+  # Added tomcat users
+  file { '/etc/tomcat/tomcat-users.xml':
+    ensure => file,
+    owner => tomcat,
+    group => tomcat,
+    notify => Service['tomcat'],
+    content => template('solr/tomcat-users.erb')
+  }
+
+  # Copy apache-commons-logging files to tomcat
+  exec { 'copy-commons-logging-lib':
+    command => '/usr/bin/cp -r /usr/share/java/commons-logging-*.jar /usr/share/tomcat/lib/',
+    require => [Package['tomcat'], Package['apache-commons-logging']]
+  }->
+
+  # Copy slf4j files to tomcat
+  exec { 'copy-commons-loggingslf4j-lib':
+    command => '/usr/bin/cp -r /usr/share/java/slf4j/slf4j-*.jar /usr/share/tomcat/lib/',
+    require => [Package['tomcat'], Package['slf4j']]
+  }->
+
+  # Download solr
+  exec { "download-solr-${version}":
+    cwd => '/tmp',
+    command => "/usr/bin/curl http://archive.apache.org/dist/lucene/solr/${version}/solr-${version}.tgz -o solr-${version}.tgz",
+    timeout => 8000,
+    unless => "/usr/bin/test -f /tmp/solr-${version}.tgz",
+  }->
+
+  # Unpack solr
+  exec { "unpack-solr-${version}":
+    cwd => '/tmp',
+    onlyif => "/usr/bin/test -f /tmp/solr-${version}.tgz",
+    command => "/usr/bin/tar -zxvf solr-${version}.tgz",
+  }->
+
+  # Copy lib files to tomcat
+  exec { 'copy-lib-files':
+    command => "/usr/bin/cp -f /tmp/solr-${version}/dist/solr-${version}.war /usr/share/tomcat/webapps/solr.war",
+    require => Package['tomcat'],
+    notify => Service['tomcat'],
+    before => File['/usr/share/tomcat/webapps/solr/WEB-INF/web.xml']
+  }->
+
+  # Create core directory and copy default core into it
+  file { '/home/solr':
+    ensure => directory,
+    owner => tomcat
+  }->
+  exec { 'copy-solr-core':
+    command => "/usr/bin/cp -r /tmp/solr-${version}/example/solr/* /home/solr/",
+    require => Package['tomcat'],
+    unless => '/usr/bin/test -d /home/solr/collection1',
+    notify => Service['tomcat']
+  }
+
+  file { '/usr/share/tomcat/webapps/solr/WEB-INF/web.xml':
+    ensure => file,
+    owner => 'tomcat',
+    content => template('solr/web.erb'),
+    subscribe => Service['tomcat']
+  }
+
+
+# Enable tomcat
+  service { 'tomcat':
+    ensure     => running,
+    enable     => true,
+    hasstatus => false,
+    require => Package['tomcat']
+  }
+}

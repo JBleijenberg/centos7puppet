@@ -15,3 +15,13 @@ redis::default::databases: 16 # Default nr. of Redis databases
 redis::default::port: 6379 # Default Redis port
 redis::default::runasdeamon: "no" # Default deamon setting
 redis::default::bind: "127.0.0.1" # Default bind address
+
+solr::version: "5.0.0"
+solr::core::schema: "solr/conf/schema.erb"
+solr::core::currency: "solr/conf/currency.erb"
+solr::core::elevate: "solr/conf/elevate.erb"
+solr::core::protwords: "solr/conf/protwords.erb"
+solr::core::stopwords: "solr/conf/stopwords.erb"
+solr::core::synonyms: "solr/conf/synonyms.erb"
+
+java::default::home: "/usr/lib/jvm/java-1.7.0-openjdk"

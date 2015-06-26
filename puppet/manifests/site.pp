@@ -9,13 +9,15 @@ node default {
     create_resources(mariadb::database, hiera('databases'))
   }
 
-  if defined(Class['solr']) {
-    create_resources(solr::core, hiera('solr-cores'))
+  if hiera('firewall') {
+    firewall { '100 allow access':
+      port   => hiera('firewall'),
+      proto  => tcp,
+      action => accept,
+    }
   }
 
-  if (hiera('known_hosts')) {
-    $hosts = hiera('known_hosts')
-
-    known_hosts::host{ $hosts: }
+  if defined(Class['solr']) {
+    create_resources(solr::core, hiera('solr-cores'))
   }
 }

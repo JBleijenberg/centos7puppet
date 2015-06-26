@@ -1,3 +1,0 @@
-class known_hosts{
-
-}

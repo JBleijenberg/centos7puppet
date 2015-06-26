@@ -14,11 +14,6 @@ settings = {
 }
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    config.vm.provision :shell do |shell|
-        shell.inline = "touch $1 && chmod 0440 $1 && echo $2 > $1"
-        shell.args = %q{/etc/sudoers.d/root_ssh_agent "Defaults    env_keep += \"SSH_AUTH_SOCK\""}
-    end
-
     # Private keys
     config.ssh.private_key_path = [ '~/.vagrant.d/insecure_private_key', settings[:private_key] ]
     config.ssh.forward_agent = true
