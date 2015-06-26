@@ -6,6 +6,10 @@
 #### Add vagrant box to your system
 ``` $ vagrant box add centos7puppet https://www.dropbox.com/s/vfxoqlxads9ct28/centos7puppet.box?dl=1 ```
 
+#### Install Vagrant plugins
+``` $ vagrant plugin install vagrant-hostsupdater ```
+``` $ vagrant plugin install vagrant-vbguest ```
+
 ####Edit your .Vagrantfile:<br/>
 Example settings:
 
