@@ -27,3 +27,7 @@ databases: # Array of databases
   "mydb2": # You database name
     user: "myuser2" # Database user
     passwd: "mypasswd2" # Password
+
+solr-cores:
+  dutch:
+    schema: "solr/conf/dutch/schema.erb"

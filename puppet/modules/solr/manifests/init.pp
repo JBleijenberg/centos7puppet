@@ -1,6 +1,7 @@
 class solr (
   $version = hiera('solr::version')
 ) {
+
   $java_home = hiera('java::default::home')
   # Install required packages
   package { ['java-1.7.0-openjdk-devel']:
@@ -25,7 +26,7 @@ class solr (
     cwd => '/tmp',
     onlyif => "/usr/bin/test -f /tmp/solr-${version}.tgz",
     command => "/usr/bin/tar -zxvf solr-${version}.tgz",
-    unless => '/usr/bin/test -d /opt/solr'
+    unless => '/usr/bin/test -d /opt/solr',
   }->
 
   # Install SOLR Service

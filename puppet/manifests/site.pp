@@ -17,7 +17,7 @@ node default {
     }
   }
 
-  if defined(Class['solr']) {
+  if empty(hiera('solr-cores')) != undef {
     create_resources(solr::core, hiera('solr-cores'))
   }
 }
