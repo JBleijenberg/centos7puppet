@@ -27,7 +27,6 @@ define solr::core (
     owner => 'solr',
     group => 'solr',
     content => template($schema),
-    require => Class['solr'],
     notify => Service['solr']
   }
 
