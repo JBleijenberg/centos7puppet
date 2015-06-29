@@ -22,7 +22,7 @@ define solr::core (
   }
 
   # Set schema file
-  file { "${coredir}/conf/schema.xml":
+  file { "${coredir}/conf/managed-schema":
     ensure => file,
     owner => 'solr',
     group => 'solr',
@@ -74,16 +74,4 @@ define solr::core (
     content => template($synonyms),
     require => Class['solr']
   }
-
-  file { "${coredir}/conf/managed-schema":
-    ensure => absent,
-    notify => Service['solr']
-  }
-
-  if empty($extra) == false {
-    notice('not empty')
-  } else {
-    notice('empty')
-  }
-
 }
