@@ -9,7 +9,8 @@ class php
     'php-mcrypt',
     'php-xml',
     'php-xmlrpc',
-    'php-bcmath'
+    'php-bcmath',
+    'php-mbstring'
   ]:
     ensure => 'present',
     notify => Service['httpd']
